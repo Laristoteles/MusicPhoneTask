@@ -1,5 +1,6 @@
 package gps;
 
+import commons.DeviceManager;
 import commons.dataClasses.GeoPoint;
 import commons.interfaces.IGps;
 
