@@ -1,8 +1,9 @@
 package commons;
 
 import commons.interfaces.IGps;
+import commons.interfaces.IPlayer;
 
-public final class DeviceManager {
+public class DeviceManager {
 	
 	/**
 	 * Singleton implementation Java-style

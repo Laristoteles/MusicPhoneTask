@@ -7,8 +7,8 @@ import commons.interfaces.IGps;
 public class Gps implements IGps{
 	private GeoPoint position;
 	private String distanceUnits;
-	public Gps(){
-		DeviceManager.Instance.Gps = this;
+	public Gps(){	
+		DeviceManager.getInstance().setGps(this);
 	}
 	@Override
 	public GeoPoint getCurrentPosition() {
