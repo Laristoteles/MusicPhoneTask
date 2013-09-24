@@ -27,7 +27,7 @@ public class MusicParser {
 	      builder.parse(
 	        ClassLoader.getSystemResourceAsStream("xmlData/events_amy winehouse.xml"));
 
-	    List<Employee> empList = new ArrayList<>();
+	    List<Employee> empList = new ArrayList<Employee>();
 
 	    //Iterating through the nodes and extracting the data.
 	    NodeList nodeList = document.getDocumentElement().getChildNodes();
