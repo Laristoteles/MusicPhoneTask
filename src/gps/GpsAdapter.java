@@ -24,16 +24,16 @@ public class GpsAdapter extends Observable implements IGps   {
 	@Override
 	public void setCurrentPosition(GeoPoint value) {
 		gps.setCurrentPosition(value);
-		//onPropertyChanged("CurrentPosition");
+		notifyObservers(this);
 		setChanged();
 	}
 
 	@Override
 	public void setDistanceUnits(String value) {
 		gps.setDistanceUnits(value);
-		//onPropertyChanged("DistanceUnits");
+		notifyObservers(this);
 		setChanged();
-		
 	}
+	
 	
 }

@@ -27,7 +27,7 @@ public class App {
 	GpsUI gpsObject = new GpsUI();
 	GpsUI.createAndShowGUI();
 
-	
+
 	}
 
 }

@@ -7,8 +7,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import commons.dataClasses.GeoPoint;
+
 public class GpsUI {
-	
+	private static GpsAdapter gps; 
+	private GpsAdapterObserver gao;
+	private GeoPoint oulu;
 
     public static void createAndShowGUI() {
     	
@@ -19,7 +23,11 @@ public class GpsUI {
     	panel.add(latlabel);
     	latlabel.setBounds(20, 10, 100, 20);
     	
+    	
+    	//Hardcoded GPS position as in the example "ottawa"
     	JTextField Lattextfield = new JTextField();
+       	Lattextfield.setText(gps.getCurrentPosition().getLatitude());
+       	Lattextfield.setEnabled(false);
     	panel.add(Lattextfield);
     	Lattextfield.setBounds(105, 15, 100, 20);
     	
@@ -28,7 +36,11 @@ public class GpsUI {
     	longlabel.setBounds(20, 35, 100, 40);
     	
     	JTextField Lontextfield = new JTextField();
+    	Lontextfield.setText(gps.getCurrentPosition().getLongitude());
+    	Lontextfield.setEnabled(false);
     	panel.add(Lontextfield);
+    	//Lontextfield.getDocument().addDocumentListener(new myTextActionListener());
+    	
     	Lontextfield.setBounds(105, 50, 100, 20);
     	
     	JLabel dislabel = new JLabel("Distance Units:");
@@ -37,13 +49,14 @@ public class GpsUI {
     	
     	ButtonGroup btngroup = new ButtonGroup();
     	
-    	JRadioButton kmbtn = new JRadioButton("km");
+    	JRadioButton kmbtn = new JRadioButton(gps.getDistanceUnits());
     	kmbtn.setBounds(105, 80, 100, 20);
     	btngroup.add(kmbtn);
     	
     	
     	JRadioButton mibtn = new JRadioButton("mi");
     	mibtn.setBounds(160, 80, 120, 20);
+    	mibtn.setEnabled(false);
     	btngroup.add(mibtn);
         panel.add(mibtn);
         panel.add(kmbtn);
@@ -73,7 +86,13 @@ public class GpsUI {
     
     
     
-	public static void main(String[] args) {
+	public GpsUI() {
+		gps =  new GpsAdapter();
+		gao = new GpsAdapterObserver();
+		oulu  = new GeoPoint("65", "45");
+		gps.addObserver(gao);
+		gps.setCurrentPosition(oulu);
+		gps.setDistanceUnits("km");
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();

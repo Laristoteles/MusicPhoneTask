@@ -4,12 +4,21 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GpsAdapterObserver implements Observer {
+	private GpsAdapter adapter;
+	public GpsAdapter getAdapter() {
+		return adapter;
+	}
 
+	public void setAdapter(GpsAdapter adapter) {
+		this.adapter = adapter;
+	}
+
+	public GpsAdapterObserver(){adapter= new GpsAdapter();}
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		GpsAdapter newValue = (GpsAdapter)o;
-		String newDistance = newValue.getDistanceUnits();
-		System.out.print("changed " + newDistance);
+		GpsAdapter gpsAdapter = (GpsAdapter)o;
+		this.setAdapter(gpsAdapter);
 
 	}
 
