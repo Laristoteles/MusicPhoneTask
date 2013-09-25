@@ -51,6 +51,7 @@ public class GpsUI {
     	
     	JRadioButton kmbtn = new JRadioButton(gps.getDistanceUnits());
     	kmbtn.setBounds(105, 80, 100, 20);
+    	kmbtn.setSelected(true);
     	btngroup.add(kmbtn);
     	
     	
