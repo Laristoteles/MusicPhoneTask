@@ -27,7 +27,7 @@ public class PlayerAdapterObserver implements Observer{
 	@Override
 	public void update(Observable obj, Object arg1) {
 		
-		//Observable playerAdapter = obj;
+		//PlayerAdapter playerAdapter = (PlayerAdapter) obj;
 		this.setAdapter((PlayerAdapter)obj);
 	}
 	
