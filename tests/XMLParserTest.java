@@ -63,5 +63,13 @@ public class XMLParserTest {
 		assertEquals(info.size(), 37);
 		assertEquals(info.get(1).getCity(), "Fremantle");
 	}
+	
+	
+	@Test
+	public void shouldAddFansCorrectly() throws IllegalAccessException{
+		LastFmXmlConnector lfmc = new LastFmXmlConnector();
+		List<String> fans = lfmc.getTopFansForArtist("abba");
+		assertEquals(fans.get(0), "abbalover");
+	}
 
 }

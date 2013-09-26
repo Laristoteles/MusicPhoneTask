@@ -30,7 +30,6 @@ import commons.dataClasses.GeoPoint;
 import commons.interfaces.IConnector;
 
 public class LastFmXmlConnector implements IConnector{
-	private static String projectFolder = "MusicPhone";
 	public static String separator = System.getProperty("file.separator");
 	private static String baseDir = System.getProperty("user.dir").concat(separator).concat("bin").concat(separator).concat("xmlData").concat(separator);
 
@@ -38,10 +37,32 @@ public class LastFmXmlConnector implements IConnector{
 
 
 	@Override
-	public List<String> getTopFansForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, LastFmConnectionException, XPathExpressionException, ParseException {
-		return null;
-
-
+	public List<String> getTopFansForArtist(String artist) throws  LastFmConnectionException   {
+		if(artist==null) throw new IllegalArgumentException("artist");
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+		domFactory.setNamespaceAware(true);
+		DocumentBuilder builder;
+		Document configuration;
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		XPathExpression expr;
+		Object result = null;
+		try {
+			builder = domFactory.newDocumentBuilder();
+			configuration = builder.parse(baseDir+ "topFans_" + artist.toLowerCase() +".xml");
+			expr = xpath.compile("//user/name");
+			result = expr.evaluate(configuration, XPathConstants.NODESET);
+		} catch (Exception e) {
+			throw new LastFmConnectionException("Could not load Topfans XML file",e);
+		}
+		
+		NodeList nodes = (NodeList) result;
+		ArrayList<String> topFans = new ArrayList<>();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			topFans.add(node.getTextContent());
+		}
+		return topFans;
 	}
 
 	//TODO: To be implemented
@@ -76,7 +97,6 @@ public class LastFmXmlConnector implements IConnector{
 			result = expr.evaluate(configuration, XPathConstants.NODESET);
 		} catch (Exception e) {
 			throw new LastFmConnectionException("Could not load Events XML file", e);
-
 		}
 
 		NodeList nodes = (NodeList) result;
