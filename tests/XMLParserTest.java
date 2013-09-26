@@ -66,10 +66,18 @@ public class XMLParserTest {
 	
 	
 	@Test
-	public void shouldAddFansCorrectly() throws IllegalAccessException{
+	public void shouldAddFansCorrectly() throws LastFmConnectionException  {
 		LastFmXmlConnector lfmc = new LastFmXmlConnector();
 		List<String> fans = lfmc.getTopFansForArtist("abba");
 		assertEquals(fans.get(0), "abbalover");
+	}
+	
+	@Test
+	public void shouldAddArtistsByFan() throws LastFmConnectionException  {
+		LastFmXmlConnector lfmc = new LastFmXmlConnector();
+		List<String> artists = lfmc.getTopArtistsByFan("galv_");
+		assertEquals(artists.get(2), "Madonna");
+		assertEquals(artists.get(17), "CocoRosie");
 	}
 
 }

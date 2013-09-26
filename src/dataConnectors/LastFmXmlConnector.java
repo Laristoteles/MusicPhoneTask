@@ -72,9 +72,33 @@ public class LastFmXmlConnector implements IConnector{
 	}
 
 	@Override
-	public List<String> getTopArtistsByFan(String fanName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getTopArtistsByFan(String fanName) throws LastFmConnectionException {
+		if(fanName==null) throw new IllegalArgumentException("fanName");
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+		domFactory.setNamespaceAware(true);
+		DocumentBuilder builder;
+		Document configuration;
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		XPathExpression expr;
+		Object result=null;
+		try {
+			builder = domFactory.newDocumentBuilder();
+			configuration = builder.parse(baseDir+ "topArtists_" + fanName.toLowerCase() +".xml");
+			expr = xpath.compile("//artist/name");
+			result = expr.evaluate(configuration, XPathConstants.NODESET);
+		} catch (Exception e) {
+			throw new LastFmConnectionException("Could not load TopArtists XML file",e);
+		}
+		
+		NodeList nodes = (NodeList) result;
+		ArrayList<String> topArtists = new ArrayList<>();
+		
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			topArtists.add(node.getTextContent());
+		}
+		return topArtists;
 	}
 
 	@Override
