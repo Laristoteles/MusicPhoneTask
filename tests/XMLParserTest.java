@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 
 import commons.dataClasses.ConcertInfo;
 
+import dataConnectors.LastFmConnectionException;
 import dataConnectors.LastFmXmlConnector;
 
 
@@ -56,7 +57,7 @@ public class XMLParserTest {
 	}
 	
 	@Test
-	public void shouldAddConcertCorrectly() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException, ParseException{
+	public void shouldAddConcertCorrectly() throws LastFmConnectionException{
 		LastFmXmlConnector lfmc = new LastFmXmlConnector();
 		List<ConcertInfo> info= lfmc.getConcertsForArtist("keane");
 		assertEquals(info.size(), 37);

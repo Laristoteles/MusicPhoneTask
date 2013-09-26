@@ -16,5 +16,5 @@ import dataConnectors.LastFmConnectionException;
 public interface IConnector {
 	List<String> getTopFansForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, LastFmConnectionException, XPathExpressionException, ParseException;
 	List<String> getTopArtistsByFan(String fanName);
-	List<ConcertInfo> getConcertsForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, ParseException;
+	List<ConcertInfo> getConcertsForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, ParseException, LastFmConnectionException;
 }

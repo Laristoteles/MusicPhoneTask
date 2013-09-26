@@ -33,26 +33,23 @@ public class LastFmXmlConnector implements IConnector{
 	private static String projectFolder = "MusicPhone";
 	public static String separator = System.getProperty("file.separator");
 	private static String baseDir = System.getProperty("user.dir").concat(separator).concat("bin").concat(separator).concat("xmlData").concat(separator);
-	
 
-	
-	
+
+
+
 	@Override
 	public List<String> getTopFansForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, LastFmConnectionException, XPathExpressionException, ParseException {
 		return null;
-	
-	    
+
+
 	}
-	
-	
-	
-	
-	
-	
+
 	//TODO: To be implemented
+	@SuppressWarnings("unused")
 	private static String removeInvalidChars(String fileName) {
 		return "";
 	}
+
 	@Override
 	public List<String> getTopArtistsByFan(String fanName) {
 		// TODO Auto-generated method stub
@@ -60,35 +57,53 @@ public class LastFmXmlConnector implements IConnector{
 	}
 
 	@Override
-	public List<ConcertInfo> getConcertsForArtist(String artist) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, ParseException {
+	public List<ConcertInfo> getConcertsForArtist(String artist) throws LastFmConnectionException {
+		if(artist==null) throw new IllegalArgumentException("artist");
+		SimpleDateFormat simpleDate = new SimpleDateFormat("EEE, dd MMM YYYY", Locale.US);
 		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-	    domFactory.setNamespaceAware(true);
-	    DocumentBuilder builder = domFactory.newDocumentBuilder();
-	    Document configuration = builder.parse(baseDir+ "events_" + artist.toLowerCase() +".xml");
+		domFactory.setNamespaceAware(true);
+		DocumentBuilder builder;
+		Document configuration;
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		XPathExpression expr;
+		Object result;
 
-	    XPathFactory xpathFactory = XPathFactory.newInstance();
-	    XPath xpath = xpathFactory.newXPath();
-	    XPathExpression expr = xpath.compile("//event");
-	    
-	    Object result = expr.evaluate(configuration, XPathConstants.NODESET);
-	    NodeList nodes = (NodeList) result;
-	    ArrayList<ConcertInfo> events = new ArrayList<>();
-	    
-	    SimpleDateFormat simpleDate = new SimpleDateFormat("EEE, dd MMM YYYY", Locale.US);
-	    for (int i = 0; i < nodes.getLength(); i++) {
-	       Node node = nodes.item(i);
-	       String venue = (String) xpath.compile("venue/location/city/text()").evaluate(node, XPathConstants.STRING);
-	       String name = (String) xpath.compile("venue/name/text()").evaluate(node, XPathConstants.STRING);
-	       String dateStr = (String) xpath.compile("startDate/text()").evaluate(node, XPathConstants.STRING);
-	       Date date = simpleDate.parse(dateStr);
-	       String geoLat = (String) xpath.compile("venue/location/geo:point/geo:lat").evaluate(node, XPathConstants.STRING);
-	       String geoLon = (String) xpath.compile("venue/location/geo:point/geo:lon").evaluate(node, XPathConstants.STRING);
-	       GeoPoint point = new GeoPoint(geoLat, geoLon);
-	       
-	       ConcertInfo info = new ConcertInfo(artist, venue, name, date, point);
-	       
-	       events.add(info);
-	    }
+		try {
+			builder = domFactory.newDocumentBuilder();
+			configuration = builder.parse(baseDir+ "events_" + artist.toLowerCase() +".xml");
+			expr = xpath.compile("//event");
+			result = expr.evaluate(configuration, XPathConstants.NODESET);
+		} catch (Exception e) {
+			throw new LastFmConnectionException("Could not load Events XML file", e);
+
+		}
+
+		NodeList nodes = (NodeList) result;
+		ArrayList<ConcertInfo> events = new ArrayList<>();
+
+		String venue;
+		String name;
+		String dateStr;
+		String geoLat;
+		String geoLon;
+		
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			try {
+				venue = (String) xpath.compile("venue/location/city/text()").evaluate(node, XPathConstants.STRING);
+				name = (String) xpath.compile("venue/name/text()").evaluate(node, XPathConstants.STRING);
+				dateStr = (String) xpath.compile("startDate/text()").evaluate(node, XPathConstants.STRING);
+				Date date = simpleDate.parse(dateStr);
+				geoLat = (String) xpath.compile("venue/location/geo:point/geo:lat").evaluate(node, XPathConstants.STRING);
+				geoLon = (String) xpath.compile("venue/location/geo:point/geo:lon").evaluate(node, XPathConstants.STRING);
+				GeoPoint point = new GeoPoint(geoLat, geoLon);
+				ConcertInfo info = new ConcertInfo(artist, venue, name, date, point);
+				events.add(info);
+			} catch (Exception e){
+				throw new LastFmConnectionException("Could not parse XML data",e);
+			}
+		}
 		return events;
 	}
 
