@@ -6,6 +6,8 @@ import java.awt.*;
 
 
 import java.awt.event.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -15,7 +17,7 @@ import player.PlayerUI;
 
 public class RecommenderUI  {
 	// to be implemented in other class. Originally were in RecommenderUI class
-	private Recs myRecs;
+	private ArrayList<E>Recs myRecs;
 	private Events myEvents;
 	//was Events (again) in the original
 	private Itinerary myItinerary;
@@ -24,7 +26,7 @@ public class RecommenderUI  {
 	PlayerUI playerWindows;
 	GpsUI gpsWindow;
 	public RecommenderUI(){
-		ra = new RecommenderAdapter(new LastFmXmlConnector(), this);
+		ra = new RecommenderAdapter(new LastFmXmlConnector());
 		playerWindows = new PlayerUI();
 		//TODO: check the way of instantiating a frame
 		playerWindows.createAndShowGUI();

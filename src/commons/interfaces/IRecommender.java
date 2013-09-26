@@ -3,7 +3,6 @@ package commons.interfaces;
 import java.util.List;
 
 import commons.dataClasses.Destination;
-import commons.dataClasses.Recomendation;
 import commons.dataClasses.Recommendation;
 
 public interface IRecommender {

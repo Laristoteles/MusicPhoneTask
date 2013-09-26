@@ -1,8 +1,6 @@
 package recommender;
 
 import java.util.List;
-import java.util.prefs.BackingStoreException;
-
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
@@ -25,16 +23,16 @@ public class RecommenderAdapter {
 		return this.progressContext;
 	}
 	
-	public RecommenderAdapter(IConnector c, IProgressContext p){
-		recommender=getIRecommenderInstanceFrom("Commons", c);
-		progressContext=p;
+	public RecommenderAdapter(IConnector c){
+		recommender.setConnector(c);
+		
 	}
 	
-	//Trying to avoid background threading. Would have use SwingWorker
+	//Trying to avoid background threading. Would have used SwingWorker
 	public void getRecommendations(Recs displayList){
 		List<Recommendation> result = null ;
 		try {
-			result= recommender.getRecommendations();
+		result= recommender.getRecommendations();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -46,7 +44,7 @@ public class RecommenderAdapter {
 				displayList.add(recommendation);
 			}
 			//progressContext.updateProgress(1.0);
-		}
+		} //else cannot generate recommendations
 	
 	}
 }
