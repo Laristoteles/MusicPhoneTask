@@ -1,9 +1,12 @@
 package player;
 
+import java.util.Observable;
+
+
 import commons.interfaces.IPlayer;
 
 
-public class PlayerAdapter implements INotifyPropertyChanged, IPlayer
+public class PlayerAdapter extends Observable implements IPlayer
 {
 		private Player player;
 
@@ -21,7 +24,9 @@ public class PlayerAdapter implements INotifyPropertyChanged, IPlayer
 		{
 			//player.PlayList = value;
 			player.setPlayList(value);
-			OnPropertyChanged("PlayList");
+			notifyObservers(this);
+			setChanged();
+			
 		}
 
 		public final Track getCurrentTrack()
@@ -32,13 +37,17 @@ public class PlayerAdapter implements INotifyPropertyChanged, IPlayer
 		{
 			//player.CurrentTrack = value;
 			player.setCurrentTrack(value);
-			OnPropertyChanged("CurrentTrack");
+			notifyObservers(this);
+			setChanged();
+			
 		}
 
 		public final void Next()
 		{
 			player.Next();
-			OnPropertyChanged("CurrentTrack");
+			notifyObservers(this);
+			setChanged();
+			
 		}
 
 
@@ -47,11 +56,14 @@ public class PlayerAdapter implements INotifyPropertyChanged, IPlayer
 			//return player.CurrentTitle;
 			return player.getCurrentTitle();
 		}
+		
 		public final void setCurrentTitle(String value)
 		{
 			//player.CurrentTitle = value;
 			player.setCurrentTitle(value);
-			OnPropertyChanged("CurrentTitle");
+			notifyObservers(this);
+			setChanged();
+			
 		}
 
 		public final String getCurrentArtist()
@@ -63,18 +75,19 @@ public class PlayerAdapter implements INotifyPropertyChanged, IPlayer
 		{
 			//player.CurrentArtist = value;
 			player.setCurrentArtist(value);
-			OnPropertyChanged("CurrentArtist");
+			notifyObservers(this);
+			setChanged();
 		}
 
 //		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void OnPropertyChanged(String p)
+		/*private void OnPropertyChanged(String p)
 		{
 			PropertyChangedEventHandler handler = PropertyChanged;
 			if (handler != null)
 			{
 				handler(this, new PropertyChangedEventArgs(p));
 			}
-		}
+		}*/
 
 }
