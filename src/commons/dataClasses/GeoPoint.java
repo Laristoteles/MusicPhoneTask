@@ -1,13 +1,16 @@
 package commons.dataClasses;
 
 public class GeoPoint {
+	
+	private String latitude;
+	private String longitude;
+	
 	public GeoPoint(String latitude, String longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-	private String latitude;
-	private String longitude;
+	
 	public String getLongitude() {
 		return longitude;
 	}

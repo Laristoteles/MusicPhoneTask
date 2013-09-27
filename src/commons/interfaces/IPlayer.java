@@ -4,10 +4,10 @@ package commons.interfaces;
 
 public interface IPlayer {
 	
-	String getCurrentTitle();
-	void setCurrentTitle(String value);
-	String getCurrentArtist();
-	void setCurrentArtist(String value);
+	public String getCurrentTitle();
+	public void setCurrentTitle(String value);
+	public String getCurrentArtist();
+	public void setCurrentArtist(String value);
 
 
 }
