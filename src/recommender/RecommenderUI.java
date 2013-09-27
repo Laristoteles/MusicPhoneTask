@@ -1,34 +1,91 @@
 package recommender;
 
+import gps.GpsUI;
+
 import java.awt.*;
 
 
 import java.awt.event.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
+import dataConnectors.LastFmXmlConnector;
+
+import player.PlayerUI;
+
 public class RecommenderUI  {
+	// to be implemented in other class. Originally were in RecommenderUI class
+	private ArrayList<E>Recs myRecs;
+	private Events myEvents;
+	//was Events (again) in the original
+	private Itinerary myItinerary;
 	
+	RecommenderAdapter ra;
+	PlayerUI playerWindows;
+	GpsUI gpsWindow;
+	public RecommenderUI(){
+		ra = new RecommenderAdapter(new LastFmXmlConnector());
+		playerWindows = new PlayerUI();
+		//TODO: check the way of instantiating a frame
+		playerWindows.createAndShowGUI();
+		//don't need to move frames around, yet
+/*        playerWindow = new PlayerUI();
+        playerWindow.Show();
+        this.Left = playerWindow.Left + playerWindow.Width;
+        this.Top = playerWindow.Top;
+
+        gpsWindow = new GpsUI();
+        gpsWindow.Top = playerWindow.Top + playerWindow.Height;
+        gpsWindow.Left = playerWindow.Left + playerWindow.Width - gpsWindow.Width;
+        gpsWindow.Show();*/
+		
+		//loads elements from resources
+/*        myRecs = (Recs)this.Resources["RecsDS"];
+        myEvents = (Events)this.Resources["EventsDS"];
+        myItinerary = (Events)this.Resources["ItineraryDS"];
+        myArtists = (Artists)this.Resources["ArtistsDS"];*/
+		
+	
+	}
+	private static boolean canceled;
 	public static void createAndShowGUI() {
-		
-		
+		 final JProgressBar progressbar = new JProgressBar();
+		 final JList artistlist = new JList();
+		 final JButton clearBtn = new JButton("Clear");
+		 final JButton cancelBtn = new JButton("Cancel");
 		//JPanel is the main container which holds all the widgets 
 		 JPanel panel = new JPanel();
 		 panel.setLayout(null);
 		    
 		 // when get recommendation button clicked, it display artists name  
-		 JButton getBtn = new JButton("Get Recommendations");
+		 final JButton getBtn = new JButton("Get Recommendations");
 		 getBtn.setBounds(20, 10, 200, 300);
 		 getBtn.setSize(170, 30);
+		 getBtn.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				artistlist.setEnabled(false);
+				getBtn.setEnabled(false);
+				clearBtn.setEnabled(false);
+				cancelBtn.setEnabled(false);
+				canceled = false;
+				progressbar.setValue(0);
+				//myEvents.clear();
+				ra.getRecommendations(myRecs);
+			}
+		});
 		 panel.add(getBtn);
 		
 			
-		 JButton cancelBtn = new JButton("Cancel");
+
 		 cancelBtn.setBounds(200, 10, 200, 300);
 		 cancelBtn.setSize(80, 30);
 		 panel.add(cancelBtn);
 		
 		 
-		 JProgressBar progressbar = new JProgressBar();
+
 		 progressbar.setBounds(290, 10, 200, 300);
 		 progressbar.setSize(120, 30);
 		 panel.add(progressbar);
@@ -36,7 +93,7 @@ public class RecommenderUI  {
 		 //The list shows artists 
 		    
 		 //String [] playlist = {};
-		 JList artistlist = new JList();
+
 		 artistlist.setSelectedIndex(1);
 	     panel.add(artistlist);
 	    	
@@ -62,15 +119,15 @@ public class RecommenderUI  {
 		 panel.add(RemoveBtn);
 		 
 		//clear button removes all selected artists from the selected artists list box 
-		 JButton ClearBtn = new JButton("Clear");
-		 ClearBtn.setBounds(470, 160, 200, 300);
-		 ClearBtn.setSize(80, 25);
-		 panel.add(ClearBtn);
+	
+		 clearBtn.setBounds(470, 160, 200, 300);
+		 clearBtn.setSize(80, 25);
+		 panel.add(clearBtn);
 		 
 		 
-		 JLabel slected = new JLabel ("Selected Artists");
-		 slected.setBounds(580, 40, 200, 20);
-		 panel.add(slected);
+		 JLabel selected = new JLabel ("Selected Artists");
+		 selected.setBounds(580, 40, 200, 20);
+		 panel.add(selected);
 		
 		 // The list shows selected artists by the user 
 		

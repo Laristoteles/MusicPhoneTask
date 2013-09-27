@@ -1,3 +1,4 @@
+
 /*** DO NOT CHANGE THE EXISTING BEHAVIOR OF THIS CLASS ***/
 
 package commons.dataClasses;
@@ -65,5 +66,4 @@ public class Destination {
 	{
 		privateDistanceUnits = value;
 	}
-
 }
