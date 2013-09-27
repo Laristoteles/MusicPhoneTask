@@ -1,7 +1,8 @@
 package player;
 
 import commons.interfaces.IPlayer;
-import commons.xmlData.DeviceManager;
+
+import commons.DeviceManager;
 import player.Track;
 
 
@@ -85,3 +86,4 @@ public class Player implements IPlayer
 public class Tracks extends System.Collections.ObjectModel.ObservableCollection<Track>
 {
 }
+

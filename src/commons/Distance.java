@@ -1,4 +1,4 @@
-package commons.xmlData;
+package commons;
 
 import commons.dataClasses.GeoPoint;
 
