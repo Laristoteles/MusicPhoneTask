@@ -31,7 +31,8 @@ import commons.interfaces.IConnector;
 
 public class LastFmXmlConnector implements IConnector{
 	public static String separator = System.getProperty("file.separator");
-	private static String baseDir = System.getProperty("user.dir").concat(separator).concat("bin").concat(separator).concat("xmlData").concat(separator);
+	private static String baseDir = System.getProperty("user.dir").concat(separator).concat("bin").concat(separator).concat("commons")
+			.concat(separator).concat("xmlData").concat(separator);
 
 
 

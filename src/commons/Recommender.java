@@ -31,7 +31,7 @@ public class Recommender implements IRecommender {
 
 	@Override
 	public List<Recommendation> getRecommendations() throws Exception {
-		ArrayList<Recommendation> rec = new ArrayList<>();
+		ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
 		String currentArtist = "cher"; //DeviceManager.getInstance().getPlayer().getCurrentArtist();
 		HashMap<String, Integer> artists = new HashMap<String, Integer>();
 		try {
