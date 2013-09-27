@@ -5,7 +5,7 @@ import java.util.Date;
 public class ConcertInfo {
 	private String artist;
 	private String city;
-	private String vanue;
+	private String venue;
 	private Date startDate;
 	private GeoPoint position;
 	public String getArtist() {
@@ -21,10 +21,10 @@ public class ConcertInfo {
 		this.city = city;
 	}
 	public String getVanue() {
-		return vanue;
+		return venue;
 	}
 	public void setVanue(String vanue) {
-		this.vanue = vanue;
+		this.venue = vanue;
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -38,12 +38,12 @@ public class ConcertInfo {
 	public void setPosition(GeoPoint position) {
 		this.position = position;
 	}
-	public ConcertInfo(String artist, String city, String vanue,
+	public ConcertInfo(String artist, String city, String venue,
 			Date startDate, GeoPoint position) {
 		super();
 		this.artist = artist;
 		this.city = city;
-		this.vanue = vanue;
+		this.venue = venue;
 		this.startDate = startDate;
 		this.position = position;
 	}

@@ -61,6 +61,7 @@ public class GpsUI {
         panel.add(mibtn);
         panel.add(kmbtn);
         
+      
        
       /*  ActionListener actionlistener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {

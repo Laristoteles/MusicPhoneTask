@@ -10,7 +10,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import commons.dataClasses.ConcertInfo;
 import commons.dataClasses.Destination;
+import commons.dataClasses.GeoPoint;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
@@ -69,14 +72,31 @@ public class Recommender implements IRecommender {
 
 	@Override
 	public List<Destination> getDestinationsForArtists(String artist) {
-		// TODO Auto-generated method stub
+		ArrayList<Destination> result = new ArrayList<>();
+		List<ConcertInfo> concerts;
+		GeoPoint currentPosition = DeviceManager.getInstance().getGps().getCurrentPosition();
+		String gpsUnits = DeviceManager.getInstance().getGps().getDistanceUnits();
+		
+		try {
+			concerts = this.connector.getConcertsForArtist(artist);
+		} catch (Exception e) {
+			return result;
+		}
+		Destination dest;
+		for (ConcertInfo concert : concerts) {
+			 dest = new Destination(concert);
+		}
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return null;
 	}
 
 	@Override
 	public List<Destination> buildItineraryForArtists(List<String> artists) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 }
