@@ -1,7 +1,7 @@
 package player;
 
+import java.util.ArrayList;
 import java.util.Observable;
-
 import commons.interfaces.IPlayer;
 
 
@@ -14,11 +14,11 @@ public class PlayerAdapter extends Observable implements IPlayer
 			player = new Player();
 		}
 
-		public final Tracks getPlayList()
+		public final ArrayList<Track> getPlayList()
 		{
 			return player.getPlayList();
 		}
-		public final void setPlayList(Tracks value)
+		public final void setPlayList(ArrayList<Track> value)
 		{
 			player.setPlayList(value);
 			notifyObservers(this);

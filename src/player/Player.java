@@ -1,14 +1,15 @@
 package player;
 
-import commons.interfaces.IPlayer;
+import java.util.ArrayList;
 
+import commons.interfaces.IPlayer;
 import commons.DeviceManager;
 import player.Track;
 
 
 public class Player implements IPlayer
 {
-	private Tracks playList;
+	private ArrayList<Track> playList;
 	private Track currentTrack = new Track();
 	private String artist;
 	private String title;
@@ -20,11 +21,11 @@ public class Player implements IPlayer
 		DeviceManager.getInstance().setPlayer(this);
 	}
 
-	public final Tracks getPlayList()
+	public final ArrayList<Track> getPlayList()
 	{
 		return playList;
 	}
-	public final void setPlayList(Tracks value)
+	public final void setPlayList(ArrayList<Track> value)
 	{
 		playList = value;
 		currentIndex = 0;
@@ -37,7 +38,6 @@ public class Player implements IPlayer
 	public final void setCurrentTrack(Track value)
 	{
 		currentTrack = value.clone();
-		//Play(currentTrack.artist, currentTrack.title);
 		Play(this.currentTrack.getArtist(),this.currentTrack.getTitle());
 		currentIndex = playList.indexOf(currentTrack.clone());
 		
@@ -47,7 +47,7 @@ public class Player implements IPlayer
 	{
 		currentIndex = (currentIndex + 1) % getPlayList().size();
 
-		currentTrack = playList[currentIndex];
+		currentTrack = (Track) playList.get(currentIndex);//playList[currentIndex];
 		//Play(currentTrack.artist, currentTrack.title);
 		Play(this.currentTrack.getArtist(),this.currentTrack.getTitle());
 	}
@@ -83,7 +83,5 @@ public class Player implements IPlayer
  * will be removed, hopefully
  */
 
-public class Tracks extends System.Collections.ObjectModel.ObservableCollection<Track>
-{
-}
+
 
