@@ -19,12 +19,9 @@ public class RecommenderTest {
 		Recommender rec = new Recommender();
 		rec.setConnector(lfmconn);
 		List<Recommendation> myRec = new ArrayList<Recommendation>();
-		myRec=rec.getRecommendations();
-		
-		for (int i = 0; i < myRec.size(); i++) {
-			System.out.println(myRec.get(i).getArtist());
-			System.out.println(myRec.get(i).getFanCount());
-		}
+		myRec=rec.getRecommendations(); 
+		assertEquals(myRec.get(0).getFanCount(), 2);
+
 	}
 
 }

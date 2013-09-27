@@ -1,6 +1,7 @@
 package commons;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
+import commons.utils.CustomComparator;
 import commons.utils.ValueComparator;
 
 public class Recommender implements IRecommender {
@@ -26,12 +28,13 @@ public class Recommender implements IRecommender {
 	@Override
 	public void setConnector(IConnector connector) {
 		this.connector = connector;
-		
+
 	}
 
 	@Override
 	public List<Recommendation> getRecommendations() throws Exception {
 		ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
+		//TODO: change "cher";
 		String currentArtist = "cher"; //DeviceManager.getInstance().getPlayer().getCurrentArtist();
 		HashMap<String, Integer> artists = new HashMap<String, Integer>();
 		try {
@@ -46,21 +49,22 @@ public class Recommender implements IRecommender {
 		} catch (Exception e) {
 			System.out.print(e);
 		}
-		//ValueComparator bvc = new ValueComparator(artists);
-		//TreeMap<String, Integer> sortedDict = new TreeMap<String, Integer>(bvc);
-	
-		for (Entry<String, Integer> entry : artists.entrySet()) {
-			
-			System.out.println(entry.getKey());
-			System.out.println(entry.getValue());
+
+		/*The entries of artists should be desc sorted by value. See commons.utils.ValueCompartor 
+		ValueComparator bvc = new ValueComparator(artists);
+		TreeMap<String, Integer> sortedDict = new TreeMap<String, Integer>(bvc);
+		 */
+
+		for (Entry<String, Integer> entry : artists.entrySet()) {			
+			rec.add(new Recommendation(entry.getKey(), entry.getValue()));
+		
 		}
 		
-//		for (int i = 0; i < 20; i++) {
-//	
-//			rec.add(new Recommendation(artists.firstEntry().getKey(), sortedDict.firstEntry().getValue()));
-//			sortedDict.remove(sortedDict.firstEntry().getKey());
-//		}
-		return rec;
+		/* Do the comparison over the ArrayList rather than HashMap. See commons.utils */
+		Collections.sort(rec, new CustomComparator());
+		
+		// returns only the top 20 artists
+		return rec.subList(0, 19);
 	}
 
 	@Override
