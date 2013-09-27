@@ -1,3 +1,5 @@
+/* See http://stackoverflow.com/a/1283722 */
+
 package commons.utils;
 
 import java.util.Comparator;
@@ -5,8 +7,8 @@ import java.util.Map;
 
 public class ValueComparator implements Comparator<String> {
 
-	Map<String, Double> base;
-    public ValueComparator(Map<String, Double> base) {
+	Map<String, Integer> base;
+    public ValueComparator(Map<String, Integer> base) {
         this.base = base;
     }
 
