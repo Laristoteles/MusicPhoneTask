@@ -2,7 +2,6 @@ package commons.interfaces;
 
 import java.util.List;
 
-import commons.NotImplementedException;
 import commons.SQATException;
 import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;

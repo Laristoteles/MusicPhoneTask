@@ -29,7 +29,7 @@ public class RecommenderUI  {
 		playerWindows = new PlayerUI();
 		playerWindows.createAndShowGUI();
 		
-		gpsWindow = new GpsUI();
+	gpsWindow = new GpsUI();
 		gpsWindow.createAndShowGUI();
 	}
 	private static boolean canceled;
@@ -46,20 +46,7 @@ public class RecommenderUI  {
 		final JButton getBtn = new JButton("Get Recommendations");
 		getBtn.setBounds(20, 10, 200, 300);
 		getBtn.setSize(170, 30);
-		getBtn.addActionListener(new ActionListener() {	
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				artistlist.setEnabled(false);
-				getBtn.setEnabled(false);
-				clearBtn.setEnabled(false);
-				cancelBtn.setEnabled(false);
-				canceled = false;
-				progressbar.setValue(0);
-				//TODO: add status text
-				ra.getRecommendation();
-				
-			}
-		});
+		
 		panel.add(getBtn);
 
 

@@ -1,6 +1,8 @@
 package recommender;
 
 import java.util.List;
+
+import commons.Recommender;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
@@ -19,11 +21,18 @@ public class RecommenderAdapter {
 		this.progressContext = progressContext;
 	}
 
+	public IRecommender getRecommender() {
+		return recommender;
+	}
+	public void setRecommender(IRecommender recommender) {
+		this.recommender = recommender;
+	}
 	public IProgressContext getProgressContext(){
 		return this.progressContext;
 	}
 
 	public RecommenderAdapter(IConnector c){
+		this.recommender=new Recommender();
 		recommender.setConnector(c);
 
 	}
