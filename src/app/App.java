@@ -13,18 +13,18 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-    PlayerUI playObject = new PlayerUI();	
+    new PlayerUI();	
 	PlayerUI.createAndShowGUI();
 	
 		
-	RecommenderUI RecObject = new RecommenderUI();
-	RecObject.createAndShowGUI();
+	new RecommenderUI();
+	RecommenderUI.createAndShowGUI();
 	
 	gps =new GpsAdapter();
 	gpsOberver = new GpsAdapterObserver();
 	gps.addObserver(gpsOberver);
 	
-	GpsUI gpsObject = new GpsUI();
+	new GpsUI();
 	GpsUI.createAndShowGUI();
 
 

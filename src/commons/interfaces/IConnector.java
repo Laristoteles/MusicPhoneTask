@@ -1,15 +1,8 @@
 
 package commons.interfaces;
 
-import java.io.IOException;
-import java.text.ParseException;
+
 import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
-import org.xml.sax.SAXException;
-
 import commons.dataClasses.ConcertInfo;
 import dataConnectors.LastFmConnectionException;
 
