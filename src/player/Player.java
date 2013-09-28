@@ -17,71 +17,64 @@ public class Player implements IPlayer
 
 	public Player()
 	{
-		//DeviceManager.Instance.Player = this;
 		DeviceManager.getInstance().setPlayer(this);
 	}
 
-	public final ArrayList<Track> getPlayList()
+	public ArrayList<Track> getPlayList()
 	{
 		return playList;
 	}
-	public final void setPlayList(ArrayList<Track> value)
+	public  void setPlayList(ArrayList<Track> value)
 	{
 		playList = value;
 		currentIndex = 0;
 	}
 
-	public final Track getCurrentTrack()
+	public  Track getCurrentTrack()
 	{
 		return currentTrack;
 	}
-	public final void setCurrentTrack(Track value)
+	public  void setCurrentTrack(Track value)
 	{
 		currentTrack = value.clone();
 		Play(this.currentTrack.getArtist(),this.currentTrack.getTitle());
-		currentIndex = playList.indexOf(currentTrack.clone());
+		currentIndex = playList.indexOf(value); 
 		
 	}
 
-	public final void Next()
+	public  void Next()
 	{
-		currentIndex = (currentIndex + 1) % getPlayList().size();
-
-		currentTrack = (Track) playList.get(currentIndex);//playList[currentIndex];
-		//Play(currentTrack.artist, currentTrack.title);
+		currentIndex = (currentIndex + 1) % getPlayList().toArray().length;
+		currentTrack = this.getPlayList().get(currentIndex);
 		Play(this.currentTrack.getArtist(),this.currentTrack.getTitle());
 	}
 
-	public final void Play(String artist, String title)
+	public  void Play(String artist, String title)
 	{
-		setCurrentArtist(artist);
-		setCurrentTitle(title);
+		this.setCurrentArtist(artist);
+		this.setCurrentTitle(title);
 	}
 
-	public final String getCurrentTitle()
+	public  String getCurrentTitle()
 	{
 		return title;
 	}
-	public final void setCurrentTitle(String value)
+	public  void setCurrentTitle(String value)
 	{
 		title = value;
 	}
 
-	public final String getCurrentArtist()
+	public  String getCurrentArtist()
 	{
 		return artist;
 	}
-	public final void setCurrentArtist(String value)
+	public  void setCurrentArtist(String value)
 	{
 		artist = value;
 	}
 
 }
 
-/*
- * resolve this Tracks then errors of this file
- * will be removed, hopefully
- */
 
 
 
