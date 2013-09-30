@@ -7,7 +7,7 @@ import commons.dataClasses.GeoPoint;
 public class GpsUI {
 	private static GpsAdapter gps; 
 	private GpsAdapterObserver gao;
-	private GeoPoint oulu;
+	private GeoPoint nyc;
 
     public static void createAndShowGUI() {
     	
@@ -70,9 +70,9 @@ public class GpsUI {
 	public GpsUI() {
 		gps =  new GpsAdapter();
 		gao = new GpsAdapterObserver();
-		oulu  = new GeoPoint("65.0167", "25.4667");
+		nyc  = new GeoPoint("42.3482", "75.1890");
 		gps.addObserver(gao);
-		gps.setCurrentPosition(oulu);
+		gps.setCurrentPosition(nyc);
 		gps.setDistanceUnits("km");
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
