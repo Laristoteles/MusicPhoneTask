@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #################
 ## Eclipse
 #################
@@ -29,9 +30,15 @@ local.properties
 .buildpath
 
 
+=======
+>>>>>>> 172e865eac126e2dcb8c486e6be346db34cb7508
 *.class
 
 # Package Files #
 *.jar
 *.war
+<<<<<<< HEAD
 *.ear
+=======
+*.ear
+>>>>>>> 172e865eac126e2dcb8c486e6be346db34cb7508
