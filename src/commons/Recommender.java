@@ -67,7 +67,7 @@ public class Recommender implements IRecommender {
 
 	@Override
 	public List<Destination> getDestinationsForArtists(String artist) {
-		ArrayList<Destination> result = new ArrayList<>();
+		ArrayList<Destination> result = new ArrayList<Destination>();
 		List<ConcertInfo> concerts;
 		Destination dest=null;
 		GeoPoint currentPosition = DeviceManager.getInstance().getGps().getCurrentPosition();

@@ -49,7 +49,7 @@ public class LastFmXmlConnector implements IConnector{
 		}
 		
 		NodeList nodes = (NodeList) result;
-		ArrayList<String> topFans = new ArrayList<>();
+		ArrayList<String> topFans = new ArrayList<String>();
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			topFans.add(node.getTextContent());
@@ -84,7 +84,7 @@ public class LastFmXmlConnector implements IConnector{
 		}
 		
 		NodeList nodes = (NodeList) result;
-		ArrayList<String> topArtists = new ArrayList<>();
+		ArrayList<String> topArtists = new ArrayList<String>();
 		
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
@@ -116,7 +116,7 @@ public class LastFmXmlConnector implements IConnector{
 		}
 
 		NodeList nodes = (NodeList) result;
-		ArrayList<ConcertInfo> events = new ArrayList<>();
+		ArrayList<ConcertInfo> events = new ArrayList<ConcertInfo>();
 
 		String venue;
 		String name;

@@ -18,8 +18,6 @@ public class GpsUI {
     	panel.add(latlabel);
     	latlabel.setBounds(20, 10, 100, 20);
     	
-    	
-    	// GPS position for Oulu (pretty much)
     	JTextField Lattextfield = new JTextField();
        	Lattextfield.setText(gps.getCurrentPosition().getLatitude());
        	Lattextfield.setEnabled(false);
