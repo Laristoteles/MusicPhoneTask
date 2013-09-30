@@ -1,19 +1,12 @@
 package commons;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 
-import commons.dataClasses.ConcertInfo;
-import commons.dataClasses.Destination;
-import commons.dataClasses.GeoPoint;
+import java.util.List;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
 
-import commons.utils.CustomComparator;
+
 
 
 public class Recommender implements IRecommender {
