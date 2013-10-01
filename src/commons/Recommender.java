@@ -6,12 +6,23 @@ import java.util.List;
 import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
+import commons.interfaces.IGps;
+import commons.interfaces.IPlayer;
 import commons.interfaces.IRecommender;
 
 
 
 
 public class Recommender implements IRecommender {
+	public Recommender(IConnector connector) {
+	
+		this.connector = connector;
+	}
+	
+	public Recommender(){
+		this.connector = null;
+	}
+
 	private IConnector connector;
 	@Override
 	public IConnector getConnector() {
@@ -35,7 +46,6 @@ public class Recommender implements IRecommender {
 		try {
 			throw new SQATException("You need to implement this!");
 		} catch (SQATException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -44,6 +54,14 @@ public class Recommender implements IRecommender {
 	@Override
 	public List<Destination> buildItineraryForArtists(List<String> artists) throws SQATException  {
 		throw new SQATException("You have to implement this");
+	}
+	
+	public static IPlayer getPlayer(){
+		return DeviceManager.getInstance().getPlayer();
+	}
+	
+	public static IGps getGps(){
+		return DeviceManager.getInstance().getGps();
 	}
 
 }
