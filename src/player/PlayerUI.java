@@ -13,7 +13,7 @@ import commons.SQATException;
 
 
 
-public class PlayerUI implements  ActionListener {
+public class PlayerUI {
 
 	private JList<Track> playlist;
 	private JButton nextbtn;
@@ -51,14 +51,6 @@ public class PlayerUI implements  ActionListener {
 		mainpanel.add(listjscroll);
 		listjscroll.setBounds(20, 60, 200, 200);
 
-		nextbtn = new JButton("Next");
-		nextbtn.addActionListener(this);
-		mainpanel.add(nextbtn);
-
-		nextbtn.setBounds(120, 80, 200, 300);
-		nextbtn.setLocation(220, 60);
-		nextbtn.setSize(60, 30);
-		nextbtn.addActionListener(this);
 
 		return mainpanel;
 
@@ -90,15 +82,8 @@ public class PlayerUI implements  ActionListener {
 
 	} 
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		try {
-			throw new SQATException("You should implement this");
-		} catch (SQATException e1) {
-			JOptionPane.showInternalMessageDialog (mainpanel,e1.getMessage());
-		}
 
-	}
+	
 
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {

@@ -42,15 +42,16 @@ public class GpsUI {
     	
     	ButtonGroup btngroup = new ButtonGroup();
     	
-    	JRadioButton kmbtn = new JRadioButton(gps.getDistanceUnits());
+    	JRadioButton kmbtn = new JRadioButton("km");
     	kmbtn.setBounds(105, 80, 100, 20);
+    	kmbtn.setEnabled(true);
     	kmbtn.setSelected(true);
     	btngroup.add(kmbtn);
     	
     	
     	JRadioButton mibtn = new JRadioButton("mi");
     	mibtn.setBounds(160, 80, 120, 20);
-    	mibtn.setEnabled(false);
+    	mibtn.setEnabled(true);
     	btngroup.add(mibtn);
         panel.add(mibtn);
         panel.add(kmbtn);
