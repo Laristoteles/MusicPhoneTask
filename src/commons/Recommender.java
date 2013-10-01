@@ -56,11 +56,11 @@ public class Recommender implements IRecommender {
 		throw new SQATException("You have to implement this");
 	}
 	
-	public static IPlayer getPlayer(){
+	public  IPlayer getPlayer(){
 		return DeviceManager.getInstance().getPlayer();
 	}
 	
-	public static IGps getGps(){
+	public  IGps getGps(){
 		return DeviceManager.getInstance().getGps();
 	}
 
