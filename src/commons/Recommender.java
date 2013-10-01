@@ -2,6 +2,8 @@ package commons;
 
 
 import java.util.List;
+
+import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IRecommender;
