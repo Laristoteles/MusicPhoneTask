@@ -22,7 +22,7 @@ public class PlayerUI {
 	private JButton nextbtn;
 	private  JTextField distext;
 	private JPanel mainpanel;
-	
+	private String currArtist;
 	private ListSelectionModel listSelectionModel;
 	private String [] songs = {"Metallica-one","Cher-Believe","U2-Elevation"};
 	//  private ListenerClass listener;
@@ -43,18 +43,16 @@ public class PlayerUI {
 		playlist = new JList(songs);
 		playlist.setSelectedIndex(0);
 		mainpanel.add(playlist);
-		String currArtist = (String) playlist.getModel().getElementAt(playlist.getSelectedIndex());
-		currArtist = currArtist.substring(0,currArtist.lastIndexOf("-"));
+		extractArtistName();
 		distext = new JTextField(currArtist);
 
 		playlist.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent lse) {
 				if (!lse.getValueIsAdjusting()) {
-					String artist = (String) playlist.getModel().getElementAt(playlist.getSelectedIndex());
-					artist = artist.substring(0, artist.lastIndexOf("-"));
-					distext.setText(artist);
-					playerAdapter.setCurrentArtist(artist);
+					 extractArtistName();
+					distext.setText(currArtist);
+					playerAdapter.setCurrentArtist(currArtist);
 				}
 
 			}
@@ -74,6 +72,10 @@ public class PlayerUI {
 
 
 
+	}
+	private void extractArtistName() {
+		currArtist = (String) playlist.getModel().getElementAt(playlist.getSelectedIndex());
+		currArtist = currArtist.substring(0,currArtist.lastIndexOf("-"));
 	}
 	public PlayerUI(){
 		this.playerAdapter = new PlayerAdapter();
