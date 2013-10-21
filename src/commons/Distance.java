@@ -8,6 +8,8 @@ public class Distance {
 	public final double EarthRadiusMI = 3958.76;
 	public final double EarthRadiusKM = 6371.01;
 	private double myComputeDistance(GeoPoint p1, GeoPoint p2, String units) {
+		double distance = 0.0;
+		
 		if(p1==null) throw new IllegalArgumentException("p1");
 		if(p2==null) throw new IllegalArgumentException("p2");
 		if(units == null) throw new IllegalArgumentException("units");
@@ -41,8 +43,9 @@ public class Distance {
          double a = Math.pow(Math.sin((p2Lat-p1Lat) /2), 2) + Math.cos(p1Lat)*Math.cos(p2Lat)*Math.pow(Math.sin((p2Lon-p1Lon)/2), 2);
          double centralAngle = 2* Math.asin(Math.min(1.0, Math.sqrt(a)));
          
-         if(units.equalsIgnoreCase("mi")) return centralAngle * EarthRadiusMI;
-         else return centralAngle*EarthRadiusKM;
-         return 0;
+         if(units.equalsIgnoreCase("mi")) distance = centralAngle * EarthRadiusMI;
+         else distance = centralAngle*EarthRadiusKM;
+      
+         return distance;
 	}
 }
