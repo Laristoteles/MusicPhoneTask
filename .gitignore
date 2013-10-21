@@ -34,3 +34,6 @@ local.properties
 *.jar
 *.war
 
+
+.besouro/
+*.txt
