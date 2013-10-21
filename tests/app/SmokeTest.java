@@ -1,6 +1,10 @@
 package app;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import gps.Gps;
 
 import org.junit.Test;
@@ -9,6 +13,7 @@ import player.Player;
 import commons.Recommender;
 import commons.dataClasses.*;
 import commons.interfaces.*;
+import dataConnectors.LastFmConnectionException;
 import dataConnectors.LastFmXmlConnector;
 
 
@@ -37,5 +42,18 @@ public class SmokeTest {
 	     assertEquals("KM", recommender.getGps().getDistanceUnits());
 	 }
 
+	 
+	 @Test
+	 public void test() throws LastFmConnectionException{
+		 LastFmXmlConnector conn = new LastFmXmlConnector();
+		 
+		 List<ConcertInfo> concerts  = new ArrayList<ConcertInfo>();
+		 concerts = conn.getConcertsForArtist("Nightwish");
+		 for (ConcertInfo concertInfo : concerts) {
+			 System.out.println("a");
+			System.out.println(concertInfo.getPosition().getLatitude());
+		}
+		 
+	 }
 }
 

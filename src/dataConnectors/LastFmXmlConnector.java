@@ -131,8 +131,8 @@ public class LastFmXmlConnector implements IConnector{
 				name = (String) xpath.compile("venue/name/text()").evaluate(node, XPathConstants.STRING);
 				dateStr = (String) xpath.compile("startDate/text()").evaluate(node, XPathConstants.STRING);
 				Date date = simpleDate.parse(dateStr);
-				geoLat = (String) xpath.compile("venue/location/geo:point/geo:lat").evaluate(node, XPathConstants.STRING);
-				geoLon = (String) xpath.compile("venue/location/geo:point/geo:lon").evaluate(node, XPathConstants.STRING);
+				geoLat = (String) xpath.compile("venue/location/point/lat/text()").evaluate(node, XPathConstants.STRING);
+				geoLon = (String) xpath.compile("venue/location/point/long/text()").evaluate(node, XPathConstants.STRING);
 				GeoPoint point = new GeoPoint(geoLat, geoLon);
 				ConcertInfo info = new ConcertInfo(artist, venue, name, date, point);
 				events.add(info);

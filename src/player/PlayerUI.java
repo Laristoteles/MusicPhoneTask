@@ -15,7 +15,7 @@ import commons.SQATException;
 
 public class PlayerUI {
 
-	private JList<Track> playlist;
+	private JList playlist;
 	private JButton nextbtn;
 	static JTextField distext;
 	private JPanel mainpanel;
@@ -43,7 +43,7 @@ public class PlayerUI {
 		distext.setBounds(130, 10, 100, 20);
 
 		String [] playlist = {"Metallica-one","Cher- Believe","U2-Elevation"};
-		JList<String> list = new JList<String>(playlist);
+		JList list = new JList(playlist);
 		list.setSelectedIndex(0);
 		mainpanel.add(list);
 
@@ -93,11 +93,11 @@ public class PlayerUI {
 		});
 	}
 
-	public JList<Track> getPlaylist() {
+	public JList getPlaylist() {
 		return playlist;
 	}
 
-	public void setPlaylist(JList<Track> playlist) {
+	public void setPlaylist(JList playlist) {
 		this.playlist = playlist;
 	}
 

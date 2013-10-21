@@ -34,7 +34,7 @@ public class RecommenderUI implements ActionListener {
 	
 	public Container createContentPane(){
 		final JProgressBar progressbar = new JProgressBar();
-		final JList<String> artistlist = new JList<String>();
+		final JList artistlist = new JList();
 		final JButton clearBtn = new JButton("Clear");
 		final JButton cancelBtn = new JButton("Cancel");
 		
@@ -101,7 +101,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(selected);
 
 		// The list shows selected artists by the user 
-		JList<String> selectedlist = new JList<String>();
+		JList selectedlist = new JList();
 		selectedlist.setSelectedIndex(1);
 		panel.add(selectedlist);
 
@@ -117,7 +117,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(concert);
 
 		// The list shows the available concerts 
-		JList<ConcertInfo> concertslist = new JList<ConcertInfo>();
+		JList concertslist = new JList();
 		selectedlist.setSelectedIndex(1);
 		panel.add(concertslist);
 
@@ -133,7 +133,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(itinerary);
 
 		// The list shows trip itinerary lists 
-		JList<Destination> itinerarylist = new JList<Destination>();
+		JList itinerarylist = new JList();
 		itinerarylist.setSelectedIndex(1);
 		panel.add(itinerarylist);
 
