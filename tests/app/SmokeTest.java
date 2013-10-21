@@ -10,6 +10,7 @@ import gps.Gps;
 import org.junit.Test;
 
 import player.Player;
+import commons.Distance;
 import commons.Recommender;
 import commons.dataClasses.*;
 import commons.interfaces.*;
@@ -43,7 +44,7 @@ public class SmokeTest {
 	 }
 
 	 
-	 @Test
+/*	 @Test
 	 public void test() throws LastFmConnectionException{
 		 LastFmXmlConnector conn = new LastFmXmlConnector();
 		 
@@ -54,6 +55,12 @@ public class SmokeTest {
 			System.out.println(concertInfo.getPosition().getLatitude());
 		}
 		 
+	 } */
+	 
+	 @Test
+	 public void shouldCalculateTheRightDistance(){
+		 assertEquals(10001.965729311481, Distance.computeDistance(new GeoPoint("0", "0"), new GeoPoint("90", "180"), "KM"), 15.0);
+         //assertEquals(10001.965729311481 * Distance.EarthRadiusMI / Distance.EarthRadiusKM, Distance.computeDistance(new GeoPoint("0", "0"), new GeoPoint("90", "180"), "MI"), 15.00);
 	 }
 }
 

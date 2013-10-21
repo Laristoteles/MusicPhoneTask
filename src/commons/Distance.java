@@ -1,21 +1,19 @@
 package commons;
 
 import commons.dataClasses.GeoPoint;
+
 public class Distance {
+	public final static double EarthRadiusMI = 3958.76;
+	public final static double EarthRadiusKM = 6371.01;
 	public static double computeDistance(GeoPoint p1, GeoPoint p2, String units){
-		return new Distance().myComputeDistance(p1, p2, units);
-	}
-	public final double EarthRadiusMI = 3958.76;
-	public final double EarthRadiusKM = 6371.01;
-	private double myComputeDistance(GeoPoint p1, GeoPoint p2, String units) {
 		double distance = 0.0;
 		
 		if(p1==null) throw new IllegalArgumentException("p1");
 		if(p2==null) throw new IllegalArgumentException("p2");
 		if(units == null) throw new IllegalArgumentException("units");
 		
-		units = units.toLowerCase();
-		if(units!="km" && units!="mi") throw new IllegalArgumentException("Invalid value");
+		units = units.toLowerCase().trim();
+		if(!units.equalsIgnoreCase("km") && units.equalsIgnoreCase("mi")) throw new IllegalArgumentException("Invalid value: " + units);
 		double p1Lat = Double.parseDouble(p1.getLatitude());
 		double p1Lon = Double.parseDouble(p1.getLongitude());
 		
