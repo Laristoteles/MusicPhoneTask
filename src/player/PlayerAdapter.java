@@ -11,6 +11,7 @@ public class PlayerAdapter extends Observable implements IPlayer
 
 		public PlayerAdapter()
 		{
+			super();
 			player = new Player();
 		}
 

@@ -9,17 +9,22 @@ import javax.swing.*;
 
 import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import commons.SQATException;
 
 
 
 public class PlayerUI {
-
+	private PlayerAdapter playerAdapter;
+	
 	private JList playlist;
 	private JButton nextbtn;
-	static JTextField distext;
+	private  JTextField distext;
 	private JPanel mainpanel;
 	
+	private ListSelectionModel listSelectionModel;
+	private String [] songs = {"Metallica-one","Cher-Believe","U2-Elevation"};
 	//  private ListenerClass listener;
 	public Container createContentPane (){
 		mainpanel = new JPanel();
@@ -30,24 +35,37 @@ public class PlayerUI {
 		mainpanel.add(playlabel);
 		playlabel.setBounds(20, 10, 100, 20);
 
-		// display the selected item
 
 		JLabel listlabel = new JLabel("Playlist");
 		mainpanel.add(listlabel);
 		listlabel.setBounds(20, 30, 100, 20);
 
+		playlist = new JList(songs);
+		playlist.setSelectedIndex(0);
+		mainpanel.add(playlist);
+		String currArtist = (String) playlist.getModel().getElementAt(playlist.getSelectedIndex());
+		currArtist = currArtist.substring(0,currArtist.lastIndexOf("-"));
+		distext = new JTextField(currArtist);
 
-		JTextField distext = new JTextField("");
+		playlist.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent lse) {
+				if (!lse.getValueIsAdjusting()) {
+					String artist = (String) playlist.getModel().getElementAt(playlist.getSelectedIndex());
+					artist = artist.substring(0, artist.lastIndexOf("-"));
+					distext.setText(artist);
+					playerAdapter.setCurrentArtist(artist);
+				}
+
+			}
+		});
+
+		
 		distext.setEnabled(false);
 		mainpanel.add(distext);
 		distext.setBounds(130, 10, 100, 20);
 
-		String [] playlist = {"Metallica-one","Cher- Believe","U2-Elevation"};
-		JList list = new JList(playlist);
-		list.setSelectedIndex(0);
-		mainpanel.add(list);
-
-		JScrollPane listjscroll = new JScrollPane(list);
+		JScrollPane listjscroll = new JScrollPane(playlist);
 		mainpanel.add(listjscroll);
 		listjscroll.setBounds(20, 60, 200, 200);
 
@@ -57,8 +75,12 @@ public class PlayerUI {
 
 
 	}
+	public PlayerUI(){
+		this.playerAdapter = new PlayerAdapter();
 
+	}
 	public static void createAndShowGUI(){
+
 		JFrame frame = new JFrame("MusicFone Player");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		PlayerUI player = new PlayerUI(); 
@@ -72,18 +94,19 @@ public class PlayerUI {
 	}
 
 
-	public void valueChanged(ListSelectionEvent lse)
-	{
-		try {
-			throw new SQATException("You should implement this");
-		} catch (SQATException e) {
-			JOptionPane.showInternalMessageDialog (mainpanel,e.getMessage());
-		}
+	//	public void valueChanged(ListSelectionEvent lse)
+	//	{
+	////		try {
+	////			throw new SQATException("You should implement this");
+	////		} catch (SQATException e) {
+	////			JOptionPane.showInternalMessageDialog (mainpanel,e.getMessage());
+	////		}
+	//		
+	//
+	//	} 
 
-	} 
 
 
-	
 
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {

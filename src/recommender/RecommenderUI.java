@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -29,15 +31,16 @@ public class RecommenderUI implements ActionListener {
 		this.ra = new RecommenderAdapter(new LastFmXmlConnector());
 
 	}
-	
+
 	private static boolean canceled;
-	
+	JList artistlist;
+	DefaultListModel<String> artistListModel;
 	public Container createContentPane(){
 		final JProgressBar progressbar = new JProgressBar();
-		final JList artistlist = new JList();
+		artistlist = new JList();
 		final JButton clearBtn = new JButton("Clear");
 		final JButton cancelBtn = new JButton("Cancel");
-		
+
 		//JPanel is the main container which holds all the widgets 
 		panel = new JPanel();
 		panel.setLayout(null);
@@ -81,7 +84,7 @@ public class RecommenderUI implements ActionListener {
 		addBtn.setSize(80, 25);
 		addBtn.addActionListener(this);
 		panel.add(addBtn);
-		
+
 		//Remove button removes selected artists from the selected artists list box 
 		JButton RemoveBtn = new JButton("Remove");
 		RemoveBtn.setBounds(470, 130, 200, 300);
@@ -143,11 +146,11 @@ public class RecommenderUI implements ActionListener {
 		itineraryscrollpane.setBounds(360, 320, 300, 20);  
 		itineraryscrollpane.setSize(360, 150);
 
-		
+
 		return panel;
 	}
-	
-	
+
+
 	public static void createAndShowGUI() {
 
 		JFrame frame = new JFrame("MusicFone Recommender");
@@ -165,13 +168,27 @@ public class RecommenderUI implements ActionListener {
 			}
 		});
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
-			throw new SQATException("You should implement this");
-		} catch (SQATException e1) {
-			JOptionPane.showInternalMessageDialog (panel,e1.getMessage());
+		//		try {
+		//			throw new SQATException("You should implement this");
+		//		} catch (SQATException e1) {
+		//			JOptionPane.showInternalMessageDialog (panel,e1.getMessage());
+		//		}
+		if(e.getActionCommand()=="Get Recommendations") {
+			artistListModel = new DefaultListModel<String>();
+			try {
+				List<Recommendation> recs = ra.getRecommender().getRecommendations();
+				for (Recommendation rec: recs) {
+					artistListModel.addElement(rec.getArtist() + "-" + rec.getFanCount());
+				}
+				
+				artistlist.setModel(artistListModel);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 	}
