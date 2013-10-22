@@ -16,9 +16,15 @@ public class Distance {
 		if(!units.equalsIgnoreCase("km") && units.equalsIgnoreCase("mi")) throw new IllegalArgumentException("Invalid value: " + units);
 		double p1Lat = Double.parseDouble(p1.getLatitude());
 		double p1Lon = Double.parseDouble(p1.getLongitude());
-		
-		double p2Lat = Double.parseDouble(p2.getLatitude());
-		double p2Lon = Double.parseDouble(p2.getLongitude());
+	
+		double p2Lat=0.0;
+		double p2Lon=0.0; 
+		try {
+			p2Lat = Double.parseDouble(p2.getLatitude());
+			 p2Lon = Double.parseDouble(p2.getLongitude());
+		} catch (NumberFormatException e) {
+			System.out.println("Cannot parse coordinates");
+		}
 		
 		 if (p1Lat < -90 || p1Lat > 90)
              throw new IllegalArgumentException("Latitude must be between -90 and 90.");

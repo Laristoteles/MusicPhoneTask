@@ -10,11 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import commons.SQATException;
 import commons.dataClasses.ConcertInfo;
 import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
+import dataConnectors.LastFmConnectionException;
 import dataConnectors.LastFmXmlConnector;
 import player.PlayerUI;
 
@@ -34,7 +37,10 @@ public class RecommenderUI implements ActionListener {
 
 	private static boolean canceled;
 	JList artistlist;
+	JList concertslist;
+	String artist;
 	DefaultListModel<String> artistListModel;
+	DefaultListModel<String> concertListModel;
 	public Container createContentPane(){
 		final JProgressBar progressbar = new JProgressBar();
 		artistlist = new JList();
@@ -59,6 +65,10 @@ public class RecommenderUI implements ActionListener {
 		cancelBtn.addActionListener(this);
 		panel.add(cancelBtn);
 
+		// The list shows the available concerts 
+		concertslist = new JList();
+		concertslist.setSelectedIndex(1);
+		panel.add(concertslist);
 
 
 		progressbar.setBounds(290, 10, 200, 300);
@@ -68,7 +78,25 @@ public class RecommenderUI implements ActionListener {
 		//The list shows artists 
 		artistlist.setSelectedIndex(1);
 		panel.add(artistlist);
+		artistlist.addListSelectionListener(new ListSelectionListener() {
 
+			@Override
+			public void valueChanged(ListSelectionEvent lse) {
+				if(!lse.getValueIsAdjusting()){
+					getArtistName();
+					List<Destination> destinations = ra.getRecommender().getDestinationsForArtists(artist);
+					concertListModel = new DefaultListModel<String>();
+					for (Destination destination : destinations) {
+						concertListModel.addElement(destination.getVenue() + ", " + destination.getCity() +
+								" @ " + destination.getStartDate().toString());
+					}
+					concertslist.setModel(concertListModel);
+					
+				}
+
+
+			}
+		});
 
 		JScrollPane artistscrollpane = new JScrollPane(artistlist);
 		panel.add(artistscrollpane );
@@ -119,13 +147,9 @@ public class RecommenderUI implements ActionListener {
 		concert.setBounds(150, 305, 300, 10);
 		panel.add(concert);
 
-		// The list shows the available concerts 
-		JList concertslist = new JList();
-		selectedlist.setSelectedIndex(1);
-		panel.add(concertslist);
 
 
-		JScrollPane concertscrollpane = new JScrollPane(selectedlist);
+		JScrollPane concertscrollpane = new JScrollPane(concertslist);
 		panel.add(concertscrollpane);
 		concertscrollpane.setBounds(20, 320, 300, 20);  
 		concertscrollpane.setSize(360, 150);
@@ -171,11 +195,6 @@ public class RecommenderUI implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//		try {
-		//			throw new SQATException("You should implement this");
-		//		} catch (SQATException e1) {
-		//			JOptionPane.showInternalMessageDialog (panel,e1.getMessage());
-		//		}
 		if(e.getActionCommand()=="Get Recommendations") {
 			artistListModel = new DefaultListModel<String>();
 			try {
@@ -183,7 +202,7 @@ public class RecommenderUI implements ActionListener {
 				for (Recommendation rec: recs) {
 					artistListModel.addElement(rec.getArtist() + "-" + rec.getFanCount());
 				}
-				
+
 				artistlist.setModel(artistListModel);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -231,6 +250,12 @@ public class RecommenderUI implements ActionListener {
 
 	public void setMyItinerary(ArrayList<Destination> myItinerary) {
 		this.myItinerary = myItinerary;
+	}
+
+
+	private void getArtistName() {
+		artist = (String)artistlist.getModel().getElementAt(artistlist.getSelectedIndex());
+		artist = artist.substring(0, artist.lastIndexOf("-"));
 	}
 
 }
