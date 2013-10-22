@@ -6,7 +6,6 @@ import commons.dataClasses.GeoPoint;
 
 public class GpsUI {
 	private static GpsAdapter gps; 
-	private GpsAdapterObserver gao;
 	private GeoPoint nyc;
 
     public static void createAndShowGUI() {

@@ -91,7 +91,7 @@ public class RecommenderUI implements ActionListener {
 								" @ " + destination.getStartDate().toString());
 					}
 					concertslist.setModel(concertListModel);
-					
+
 				}
 
 
@@ -259,8 +259,12 @@ public class RecommenderUI implements ActionListener {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Array out of bound");
 		}
-	
-		artist = artist.substring(0, artist.lastIndexOf("-"));
+		try {
+			artist = artist.substring(0, artist.lastIndexOf("-"));
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("String index out of bound");
+		}
+
 	}
 
 }
