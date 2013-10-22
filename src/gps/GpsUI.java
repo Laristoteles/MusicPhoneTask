@@ -65,19 +65,19 @@ public class GpsUI {
     }
     
     
-    
+    public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
 	public GpsUI() {
-		gps =  new GpsAdapter();
-		gao = new GpsAdapterObserver();
+		this.gps = new GpsAdapter();
 		nyc  = new GeoPoint("42.3482", "75.1890");
-		gps.addObserver(gao);
 		gps.setCurrentPosition(nyc);
 		gps.setDistanceUnits("km");
-		SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+
 		
 
 	}

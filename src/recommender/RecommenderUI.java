@@ -254,7 +254,12 @@ public class RecommenderUI implements ActionListener {
 
 
 	private void getArtistName() {
-		artist = (String)artistlist.getModel().getElementAt(artistlist.getSelectedIndex());
+		try {
+			artist = (String)artistlist.getModel().getElementAt(artistlist.getSelectedIndex());
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Array out of bound");
+		}
+	
 		artist = artist.substring(0, artist.lastIndexOf("-"));
 	}
 

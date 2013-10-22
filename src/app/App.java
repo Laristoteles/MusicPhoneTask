@@ -20,9 +20,9 @@ public class App {
 	new RecommenderUI();
 	RecommenderUI.createAndShowGUI();
 	
-	gps =new GpsAdapter();
-	gpsOberver = new GpsAdapterObserver();
-	gps.addObserver(gpsOberver);
+//	gps =new GpsAdapter();
+//	gpsOberver = new GpsAdapterObserver();
+//	gps.addObserver(gpsOberver);
 	
 	new GpsUI();
 	GpsUI.createAndShowGUI();
