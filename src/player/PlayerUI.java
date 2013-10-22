@@ -39,8 +39,11 @@ public class PlayerUI {
 
 		playlist = new JList(songs);
 		playlist.setSelectedIndex(0);
-		mainpanel.add(playlist);
 		getArtistName();
+		
+		mainpanel.add(playlist);
+		playerAdapter.setCurrentArtist(currArtist);
+
 		distext = new JTextField(currArtist);
 
 		playlist.addListSelectionListener(new ListSelectionListener() {

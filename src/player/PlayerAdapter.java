@@ -73,8 +73,8 @@ public class PlayerAdapter extends Observable implements IPlayer
 		public final void setCurrentArtist(String value)
 		{
 			player.setCurrentArtist(value);
-			notifyObservers(this);
-			setChanged();
+			//notifyObservers(this);
+			//setChanged();
 		}
 
 //		public event PropertyChangedEventHandler PropertyChanged;

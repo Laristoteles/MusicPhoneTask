@@ -76,7 +76,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(progressbar);
 
 		//The list shows artists 
-		artistlist.setSelectedIndex(1);
+		artistlist.setSelectedIndex(0);
 		panel.add(artistlist);
 		artistlist.addListSelectionListener(new ListSelectionListener() {
 
