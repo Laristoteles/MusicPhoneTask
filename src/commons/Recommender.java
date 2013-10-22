@@ -9,7 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import commons.dataClasses.ConcertInfo;
 import commons.dataClasses.Destination;
+import commons.dataClasses.GeoPoint;
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IGps;
@@ -92,12 +94,31 @@ public class Recommender implements IRecommender {
 
 	@Override
 	public List<Destination> getDestinationsForArtists(String artist) {
+//		try {
+//			throw new SQATException("You need to implement this!");
+//		} catch (SQATException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+		if(artist==null) throw new IllegalArgumentException("Invalid artist name");
+		if(DeviceManager.getInstance().getGps() == null) throw new IllegalStateException("Cannot access GPS device");
+		GeoPoint currentPosition = DeviceManager.getInstance().getGps().getCurrentPosition();
+		String units = DeviceManager.getInstance().getGps().getDistanceUnits();
+		if(currentPosition == null || units == "") throw new IllegalStateException("Cannot read information from GPS device");
+		List<Destination> destinationsForArtist = new ArrayList<Destination>();
+		List<ConcertInfo> concerts = null;
 		try {
-			throw new SQATException("You need to implement this!");
-		} catch (SQATException e) {
-			e.printStackTrace();
+			concerts = connector.getConcertsForArtist(artist);
+		} catch (LastFmConnectionException e) {
+			return new ArrayList<Destination>();
 		}
-		return null;
+		for (ConcertInfo info : concerts) {
+			Destination d = new Destination(info);
+			d.setDistance(Distance.computeDistance(currentPosition, info.getPosition(), units));
+			d.setDistanceUnits(units);
+			destinationsForArtist.add(d);
+		}
+		return destinationsForArtist;
 	}
 
 	@Override
