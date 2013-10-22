@@ -5,7 +5,7 @@ import java.util.Observable;
 import commons.interfaces.IPlayer;
 
 
-public class PlayerAdapter extends Observable implements IPlayer
+public class PlayerAdapter  implements IPlayer
 {
 		private Player player;
 
@@ -22,8 +22,8 @@ public class PlayerAdapter extends Observable implements IPlayer
 		public final void setPlayList(ArrayList<Track> value)
 		{
 			player.setPlayList(value);
-			notifyObservers(this);
-			setChanged();
+//			notifyObservers(this);
+//			setChanged();
 			
 		}
 
@@ -35,16 +35,16 @@ public class PlayerAdapter extends Observable implements IPlayer
 		public final void setCurrentTrack(Track value)
 		{
 			player.setCurrentTrack(value);
-			notifyObservers(this);
-			setChanged();
+			//notifyObservers(this);
+			//setChanged();
 			
 		}
 
 		public final void Next()
 		{
 			player.Next();
-			notifyObservers(this);
-			setChanged();
+		//	notifyObservers(this);
+			//setChanged();
 			
 		}
 
@@ -58,8 +58,8 @@ public class PlayerAdapter extends Observable implements IPlayer
 		public final void setCurrentTitle(String value)
 		{
 			player.setCurrentTitle(value);
-			notifyObservers(this);
-			setChanged();
+		//	notifyObservers(this);
+		//	setChanged();
 			
 		}
 
