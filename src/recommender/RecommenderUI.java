@@ -36,11 +36,13 @@ public class RecommenderUI implements ActionListener {
 	}
 
 	private static boolean canceled;
-	JList artistlist;
-	JList concertslist;
+	private JList artistlist;
+	private JList concertslist;
+	private JList  selectedlist;
 	String artist;
 	DefaultListModel<String> artistListModel;
 	DefaultListModel<String> concertListModel;
+	DefaultListModel<String> selectedArtistsForTripModel;
 	public Container createContentPane(){
 		final JProgressBar progressbar = new JProgressBar();
 		artistlist = new JList();
@@ -132,8 +134,8 @@ public class RecommenderUI implements ActionListener {
 		panel.add(selected);
 
 		// The list shows selected artists by the user 
-		JList selectedlist = new JList();
-		selectedlist.setSelectedIndex(1);
+		selectedlist = new JList();
+		selectedlist.setSelectedIndex(0);
 		panel.add(selectedlist);
 
 
@@ -165,7 +167,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(itinerarylist);
 
 
-		JScrollPane itineraryscrollpane = new JScrollPane(selectedlist);
+		JScrollPane itineraryscrollpane = new JScrollPane(itinerarylist);
 		panel.add(itineraryscrollpane);
 		itineraryscrollpane.setBounds(360, 320, 300, 20);  
 		itineraryscrollpane.setSize(360, 150);
@@ -208,6 +210,27 @@ public class RecommenderUI implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
+
+		if(e.getActionCommand()=="Add") {
+			if(selectedArtistsForTripModel==null) selectedArtistsForTripModel = new DefaultListModel<String>();
+			if(selectedArtistsForTripModel.indexOf(artist)==-1){
+				selectedArtistsForTripModel.addElement(artist);
+				selectedlist.setModel(selectedArtistsForTripModel);
+			}
+		}
+
+		if(e.getActionCommand()=="Remove") {
+
+			if(!selectedArtistsForTripModel.isEmpty() && selectedlist.getSelectedIndex()!=-1){
+				selectedArtistsForTripModel.remove(selectedlist.getSelectedIndex());
+				selectedlist.setSelectedIndex(selectedArtistsForTripModel.size()-1);
+			}
+		}
+		
+		if(e.getActionCommand()=="Clear") {
+
+		selectedArtistsForTripModel.removeAllElements();
 		}
 
 	}
