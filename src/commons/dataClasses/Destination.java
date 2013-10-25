@@ -66,4 +66,8 @@ public class Destination {
 	{
 		privateDistanceUnits = value;
 	}
+	
+	public void setPosition(GeoPoint point){
+		concertInfo.setPosition(point);
+	}
 }
