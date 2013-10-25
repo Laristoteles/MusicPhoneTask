@@ -17,9 +17,7 @@ import commons.interfaces.*;
 import dataConnectors.LastFmConnectionException;
 import dataConnectors.LastFmXmlConnector;
 
-
 public class SmokeTest {
-
 	 @Test
 	 public void HowToUsePlayerGpsAndRecommenderInUnitTests()
 	 {
@@ -41,26 +39,6 @@ public class SmokeTest {
 	     assertEquals(position.getLongitude(), recommender.getGps().getCurrentPosition().getLongitude());
 	     assertEquals("Cher", recommender.getPlayer().getCurrentArtist());
 	     assertEquals("KM", recommender.getGps().getDistanceUnits());
-	 }
-
-	 
-/*	 @Test
-	 public void test() throws LastFmConnectionException{
-		 LastFmXmlConnector conn = new LastFmXmlConnector();
-		 
-		 List<ConcertInfo> concerts  = new ArrayList<ConcertInfo>();
-		 concerts = conn.getConcertsForArtist("Nightwish");
-		 for (ConcertInfo concertInfo : concerts) {
-			 System.out.println("a");
-			System.out.println(concertInfo.getPosition().getLatitude());
-		}
-		 
-	 } */
-	 
-	 @Test
-	 public void shouldCalculateTheRightDistance(){
-		 assertEquals(10001.965729311481, Distance.computeDistance(new GeoPoint("0", "0"), new GeoPoint("90", "180"), "KM"), 15.0);
-         //assertEquals(10001.965729311481 * Distance.EarthRadiusMI / Distance.EarthRadiusKM, Distance.computeDistance(new GeoPoint("0", "0"), new GeoPoint("90", "180"), "MI"), 15.00);
 	 }
 }
 
