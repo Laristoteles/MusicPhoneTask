@@ -1,20 +1,13 @@
 package app;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import gps.Gps;
-
 import org.junit.Test;
-
 import player.Player;
-import commons.Distance;
 import commons.Recommender;
 import commons.dataClasses.*;
 import commons.interfaces.*;
-import dataConnectors.LastFmConnectionException;
+
 import dataConnectors.LastFmXmlConnector;
 
 public class SmokeTest {

@@ -13,7 +13,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import commons.SQATException;
+import commons.ToBeImplementedException;
 import commons.dataClasses.ConcertInfo;
 import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
@@ -209,7 +209,6 @@ public class RecommenderUI implements ActionListener {
 
 				artistlist.setModel(artistListModel);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -259,8 +258,7 @@ public class RecommenderUI implements ActionListener {
 				itineraryListModel.addElement(artist + " in " + city + ", " + date);			
 			}
 			itinerarylist.setModel(itineraryListModel);
-		} catch (SQATException e1) {
-			// TODO Auto-generated catch block
+		} catch (ToBeImplementedException e1) {
 			e1.printStackTrace();
 		}
 	}

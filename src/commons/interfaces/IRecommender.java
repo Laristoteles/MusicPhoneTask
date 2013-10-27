@@ -2,7 +2,7 @@ package commons.interfaces;
 
 import java.util.List;
 
-import commons.SQATException;
+import commons.ToBeImplementedException;
 import commons.dataClasses.Destination;
 import commons.dataClasses.Recommendation;
 
@@ -11,5 +11,5 @@ public interface IRecommender {
 	void setConnector(IConnector connector);
 	List<Recommendation> getRecommendations() throws Exception;
 	List<Destination> getDestinationsForArtists(String artist);
-	List<Destination> buildItineraryForArtists(List<String> artists) throws SQATException;
+	List<Destination> buildItineraryForArtists(List<String> artists) throws ToBeImplementedException;
 }
