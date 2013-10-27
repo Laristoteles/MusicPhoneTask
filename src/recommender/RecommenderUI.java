@@ -39,10 +39,12 @@ public class RecommenderUI implements ActionListener {
 	private JList artistlist;
 	private JList concertslist;
 	private JList  selectedlist;
+	private JList itinerarylist;
 	String artist;
 	DefaultListModel<String> artistListModel;
 	DefaultListModel<String> concertListModel;
 	DefaultListModel<String> selectedArtistsForTripModel;
+	DefaultListModel<String> itineraryListModel;
 	public Container createContentPane(){
 		final JProgressBar progressbar = new JProgressBar();
 		artistlist = new JList();
@@ -154,7 +156,7 @@ public class RecommenderUI implements ActionListener {
 		JScrollPane concertscrollpane = new JScrollPane(concertslist);
 		panel.add(concertscrollpane);
 		concertscrollpane.setBounds(20, 320, 300, 20);  
-		concertscrollpane.setSize(360, 150);
+		concertscrollpane.setSize(350, 150);
 
 
 		JLabel itinerary = new JLabel ("Trip Itinerary");
@@ -162,7 +164,7 @@ public class RecommenderUI implements ActionListener {
 		panel.add(itinerary);
 
 		// The list shows trip itinerary lists 
-		JList itinerarylist = new JList();
+		itinerarylist = new JList();
 		itinerarylist.setSelectedIndex(1);
 		panel.add(itinerarylist);
 
@@ -170,7 +172,7 @@ public class RecommenderUI implements ActionListener {
 		JScrollPane itineraryscrollpane = new JScrollPane(itinerarylist);
 		panel.add(itineraryscrollpane);
 		itineraryscrollpane.setBounds(360, 320, 300, 20);  
-		itineraryscrollpane.setSize(360, 150);
+		itineraryscrollpane.setSize(350, 150);
 
 
 		return panel;
@@ -214,9 +216,27 @@ public class RecommenderUI implements ActionListener {
 
 		if(e.getActionCommand()=="Add") {
 			if(selectedArtistsForTripModel==null) selectedArtistsForTripModel = new DefaultListModel<String>();
+			itineraryListModel = new DefaultListModel<String>();
 			if(selectedArtistsForTripModel.indexOf(artist)==-1){
 				selectedArtistsForTripModel.addElement(artist);
 				selectedlist.setModel(selectedArtistsForTripModel);
+				try {
+					List<String> artistList = new ArrayList<>();
+					for (int i = 0; i < selectedArtistsForTripModel.size(); i++) {
+						artistList.add(selectedArtistsForTripModel.elementAt(i));
+					}
+					List<Destination> destinations = ra.getRecommender().buildItineraryForArtists(artistList);
+					for (Destination destination : destinations) {
+						System.out.println("Next stop: " + destination.getCity());
+						String artist = destination.getArtist();
+						String city = destination.getCity();
+						String date = destination.getStartDate().toString();
+						itineraryListModel.addElement(artist + " in " + city + ", " + date);			
+					}
+					itinerarylist.setModel(itineraryListModel);
+				} catch (SQATException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 
@@ -225,12 +245,33 @@ public class RecommenderUI implements ActionListener {
 			if(!selectedArtistsForTripModel.isEmpty() && selectedlist.getSelectedIndex()!=-1){
 				selectedArtistsForTripModel.remove(selectedlist.getSelectedIndex());
 				selectedlist.setSelectedIndex(selectedArtistsForTripModel.size()-1);
+				itineraryListModel.clear();
+				List<String> artistList = new ArrayList<>();
+				for (int i = 0; i < selectedArtistsForTripModel.size(); i++) {
+					artistList.add(selectedArtistsForTripModel.elementAt(i));
+				}
+				try {
+					List<Destination> destinations = ra.getRecommender().buildItineraryForArtists(artistList);
+					for (Destination destination : destinations) {
+						System.out.println("Next stop: " + destination.getCity());
+						String artist = destination.getArtist();
+						String city = destination.getCity();
+						String date = destination.getStartDate().toString();
+						itineraryListModel.addElement(artist + " in " + city + ", " + date);			
+					}
+					itinerarylist.setModel(itineraryListModel);
+				} catch (SQATException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		}
 		
 		if(e.getActionCommand()=="Clear") {
 
-		selectedArtistsForTripModel.removeAllElements();
+		selectedArtistsForTripModel.clear();
+		itineraryListModel.clear();
 		}
 
 	}
