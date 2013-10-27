@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #################
 ## Eclipse
 #################
@@ -31,11 +32,14 @@ local.properties
 
 =======
 >>>>>>> 40fb69ca03bfa8cbe05bd8b17f60f203af09c8f7
+=======
+>>>>>>> a3252bd7df4bd9f1b5cfae9ad7418175a92451e6
 *.class
 
 # Package Files #
 *.jar
 *.war
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -44,3 +48,6 @@ local.properties
 =======
 *.ear
 >>>>>>> 40fb69ca03bfa8cbe05bd8b17f60f203af09c8f7
+=======
+*.ear
+>>>>>>> a3252bd7df4bd9f1b5cfae9ad7418175a92451e6
