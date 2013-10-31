@@ -244,7 +244,7 @@ public class RecommenderUI implements ActionListener {
 
 
 	private void updateItineraryList() {
-		List<String> artistList = new ArrayList<>();
+		List<String> artistList = new ArrayList<String>();
 		for (int i = 0; i < selectedArtistsForTripModel.size(); i++) {
 			artistList.add(selectedArtistsForTripModel.elementAt(i));
 		}
