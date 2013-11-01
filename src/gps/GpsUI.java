@@ -72,7 +72,7 @@ public class GpsUI {
 		});
 	}
 	public GpsUI() {
-		this.gps = new GpsAdapter();
+		gps = new GpsAdapter();
 		nyc  = new GeoPoint("42.3482", "75.1890");
 		gps.setCurrentPosition(nyc);
 		gps.setDistanceUnits("km");

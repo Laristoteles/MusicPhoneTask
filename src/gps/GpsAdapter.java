@@ -1,8 +1,5 @@
 package gps;
 
-
-import java.util.Observable;
-
 import commons.dataClasses.GeoPoint;
 import commons.interfaces.IGps;
 

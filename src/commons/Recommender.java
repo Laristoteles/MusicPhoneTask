@@ -1,25 +1,15 @@
 package commons;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import commons.dataClasses.ConcertInfo;
+
 import commons.dataClasses.Destination;
-import commons.dataClasses.GeoPoint;
+
 import commons.dataClasses.Recommendation;
 import commons.interfaces.IConnector;
 import commons.interfaces.IGps;
 import commons.interfaces.IPlayer;
 import commons.interfaces.IRecommender;
-import dataConnectors.LastFmConnectionException;
 
 
 
